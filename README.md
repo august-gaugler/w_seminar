@@ -4,3 +4,5 @@ This repository was created specifically for storing my Wissenschaftspropädeuti
 
 As of 2/6/2024, a.pdf file as well as a preliminary version of slides should be available.
 I might add an English translation in the future.
+
+Disclaimer: I own none of the pictures, except those marked with "(Eigene Arbeit)" in the image bibliography. Otherwise, all copyright goes to their rightful owners.
