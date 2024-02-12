@@ -1,0 +1,1106 @@
+\begin{filecontents*}{bibtexa.bib}
+
+@book{lehrbuch,
+author = "{{J}oos, {G}eorg}",
+title = "{{L}ehrbuch der {T}heoretischen {P}hysik}",
+version = "{15. neubearbeitete {A}uflage}",
+publisher = "{AULA}",
+year = "{1989}"
+}
+
+@online{weihnachtsübung,
+author = "{{Nieper-Wißkirchen}, Marc; Stoll, {L}ukas}",
+title = "{{W}eihnachtsübung zur {A}nalysis {I}{I}{I}}", 
+year = "2022",
+publisher = "{{U}niversität {A}ugsburg {W}intersemester 2022/23}",
+url= {https://ana.mathe.sexy/uebungW.pdf},
+note = "{{L}etzter {Z}ugriff am 06.11.2023}"
+}
+
+@online{georgi,
+    author = "{Kocharyan, {G}eorgi}",
+    title = "{{A}xiomatic set theory, {P}latonism and the {I}ncompleteness {T}heorems}",
+    url = {https://georgi-kocharyan.de/gk445_settheory.pdf},
+    year= "2020",
+    note = "{{L}etzter {Z}ugriff am 06.11.2023}"
+}
+
+@book{varcalc,
+author = "{Rindler, {F}ilip}",
+title = "{{C}alculus of {V}ariations}",
+publisher = "{{S}pringer}",
+year = "{2018}"
+}
+
+@book{varintro,
+author = "{Dacorogna, {B}ernard}",
+title= "{{I}ntroduction to the {C}alculus of {V}ariations}",
+publisher = "{{I}mperial {C}ollege {P}ress}", 
+volume= "{3}",
+year= "2015"
+}
+
+@book{varopt,
+author = "{{T}routman, {J}ohn}",
+title = "{{V}ariational {C}alculus and {O}ptimal {C}ontrol}",
+subtitle = "{{O}ptimization with {E}lementary {C}onvexity}",
+publisher = "{{S}pringer-{V}erlag {N}ew {Y}ork}", 
+volume = "{2}",
+year = "1983",
+}
+
+@book{nlinopt,
+author= "{{S}tein, {O}liver}",
+title = "{{G}rundzüge der {N}ichtlinearen {O}ptimierung}",
+publisher = "{Springer}",
+year = "2018"
+}
+
+@book{levivarintro,
+author= "{{L}evi, {M}ark}",
+title= {{C}lassical {M}echanics with {C}alculus of {V}ariations and {O}ptimal {C}ontrol},
+subtitle = "{{A}n {I}ntuitive {I}ntroduction}",
+volume = "{69}", 
+publisher = "{{S}tudent {M}athematical {L}ibrary} {{A}merican {M}athematical {S}ociety {M}athematics {A}dvanced {S}tudy {S}emesters}",
+year = "2014"
+}
+
+@online{acta,
+author = "{{B}ernoulli, {J}ohann}",
+title = {{A}cta {E}ruditorum {A}nno {M}{D}{C}{X}{C}{V}{I} publicata},
+subtitle = "{{C}um {S}. {C}aesarae {M}ajestatis et {P}otentissimi {E}lectoris {S}axoniae privilegiis}",
+journaltitle = "{{A}cta {E}ruditorum}",
+publisher = "{{L}ipsiæ, {J}. {G}rossii {H}aeredes et {J}oh. {T}hom. {F}ritschium; Typis {I}ohannis {G}eorgii}",
+date = "1696",
+url = {https://babel.hathitrust.org/cgi/pt?id=mdp.39015067096282},
+note = "{{L}etzter {Z}ugriff am 06.11.2023}"
+}
+\end{filecontents*}
+\documentclass[12pt]{report}
+%\usepackage[utf8]{inputenc}
+\usepackage{graphicx} 
+\usepackage{graphics}
+\usepackage{quiver}
+\graphicspath{ {./images/} }
+\usepackage{float}
+\usepackage{array}
+\usepackage[ngerman]{babel}
+\usepackage{csquotes}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=3.25cm,marginparwidth=0.25cm]{geometry}
+\usepackage{caption}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+%\usepackage{pgfplots}
+%\usepackage[dvipsnames]{xcolor}
+%\usepackage{wrapfig}
+%\usepackage[rightcaption]{sidecap}
+%\usepackage{fontspec}
+%trying diff color out
+%\usepackage{xcolor}
+%\pagecolor[rgb]{0,0,0} %black
+%\color[rgb]{0.5,0.5,0.5} %grey
+%\setmainfont{Arial}
+%\fontsize{12}{18}
+\usepackage{setspace}
+%\usepackage[sorting=nyt]{biblatex}
+%\usepackage[backend=biber,style=alphabetic,sorting=ynt]{biblatex}
+%\addbibresource{bibtex.bib}
+\renewcommand{\baselinestretch}{1.5}
+\setlength\parindent{0pt}
+\counterwithout{footnote}{chapter}
+\newcommand{\dd}{\mathrm{d}}
+\counterwithout{figure}{chapter}
+
+
+\usepackage[backend=biber,defernumbers=true]{biblatex} 
+\addbibresource{bibtexa.bib}
+
+\title{\Large{Die Brachistochrone} \\Eine Einführung in die Variationsrechnung}
+\author{Anna Gaugler}
+\date{07.11.2023}
+
+\begin{document}
+%\kant[1-2]
+%\pagecolor[rgb]{0,0,0} %black
+%\color[rgb]{0.5,0.5,0.5} %grey
+\maketitle
+
+\newpage
+
+\thispagestyle{empty}
+\tableofcontents
+%\thispagestyle{empty}
+
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\pagenumbering{gobble}
+
+\newpage
+% Link zur Weitergabe (nur lesen):
+%https://www.overleaf.com/read/mxkshdwnctgx
+\begin{abstract}
+  Diese W-Seminar-Arbeit gibt basierend auf Konzepten der gymnasialen Oberstufe in Bayern eine Einführung in Konzepte der Variationsrechnung, mit Fokus auf dem Rechnen mit Funktionen höherer Ordnung und partiellen Ableitungen anhand der Euler--Lagrange-Gleichung. 
+  Dabei steht das Leuchtturmproblem der Variationsrechnung nach Johann Bernoulli I. im Vordergrund.
+
+  % In dieser W-Seminar-Arbeit wird auf Basis mathematischen Wissens aus der gymnasialen Oberstufe in Bayern eine kurze Einführung in die Variationsrechnung und komplexere partielle Differentiation gegeben. Dabei steht das Leuchtturmproblem der Variationsrechnung, die Brachistochrone, frei nach Johann Bernoulli I., im Vordergrund.
+
+  \textit{Anmerkung: Alle nicht speziellen Quellen zugeordnete Informationen stammen von Prof. Dr. Marc Nieper-Wißkirchen, Prodekan MNTF sowie Lehrstuhlinhaber für Algebra und Zahlentheorie an der Universität Augsburg.}
+
+\end{abstract}
+
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\pagenumbering{arabic}
+
+\chapter{Historischer Einstieg}
+Wir schreiben das Jahr 1696. 
+In einem Zeitalter geprägt durch politische Verkomplizierung, einer immer zentraler werdenden Wertschätzung der Naturwissenschaften und vielen Aufständen und Revolten, macht die Mathematik einen plötzlichen Sprung und erschließt sich ein ganz neues Teilgebiet: die \textit{Variationsrechnung}. 
+Auslöser dafür ist der Schweizer Johann Bernoulli I., der in der Zeitschrift \textit{Acta Eruditorum} ein derart bahnbrechendes Problem veröffentlicht, das die Geburtsstunde der Variationsrechnung einleitet: das Problem der Brachistochrone.
+
+Wie kann es kommen, das ein einziges neues Problem einen derart großen wissenschaftlichen Fortschritt bewirkt? Wie so häufig ist es eine leicht formulierten Fragestellung mit einer schwierigen Antwort.
+
+Der Name des Problems der \textit{Brachistochrone} stammt vom griechischen \textit{brachys} (kurz) und \textit{chronos} (Zeit) und wird daher manchmal auch als \textit{Brachystochrone} geschrieben, vor allem in englischsprachigen Quellen. 
+Wie der Name auch schon sagt, suchen wir nach etwas mit einer kurzen Menge an Zeit - man will die schnellste zweidimensionale Rutsche finden. 
+Dies machen wir im $\mathbb{R}^2$, unter Einfluss von Gravitation in Richtung der negativen $y-$Achse.
+
+Das Problem der Brachistochrone ist bedeutend und dennoch vielen Mathematik betreibenden Menschen unbekannt. 
+Die Variationsrechnung selber wird trotz ihrer Wichtigkeit in der theoretischen Physik und höheren Mathematik im Mathematikstudium nur als Mastervorlesung abgehandelt oder mal am Rande erwähnt.
+
+\section{Urtext}
+Die ursprüngliche Formulierung aus den \textit{Acta Eruditorum} lässt sich in dem folgenden Absatz finden:\footnote{Das Bild wurde für Klarheit bereinigt.}
+
+%Bildquelle angeben!!
+\begin{figure}[ht]
+  
+  \centering  
+ %\caption{Ursprüngliche Fragestellung des Brachistochronenproblems.}
+  \includegraphics[scale=0.85]{origina}
+  \caption[Ursprüngliche Fragestellung des Brachistochronenproblems. Acta Eruditorum, S. 285. Original aus der Universität Michigan \url{https://babel.hathitrust.org/cgi/pt?id=mdp.39015067096282}]
+  {Ursprüngliche Fragestellung des Brachistochronenproblems.}
+  \label{fig:acta1}
+  %\label{fig:actaeruditorum1} 
+\end{figure} 
+
+\paragraph{Transkript.} Problema novum ad cujus Solutionem Mathematici invitantur.
+\textit {Datis in plano verticali duobus punctis A et B [...] affignare Mobili M, viam AMB, per quam gravitare sua descendens et [...] moveri incipiens a puncto A, brevissimo tempore perveniat ad alterum punctum B.}\footnote{\cite{acta}}
+
+
+\section{Heutige Formulierung}
+Um das Problem der Brachistochrone zu lösen, muss man sich mit einer häufigen Fragestellung der Physik beschäftigen: für welche Funktion $f(x)$ wird ein Integral, dessen Integrand von $x$, $f$ und der ersten Ableitung von $f$, also $f'(x)$, abhängig ist, ein Extremum? 
+Statt der Suche nach einem Extremum einer bekannten Funktion, bekannt aus der Differentialrechnung, ist hier die ganze Funktion $f$ variabel und soll so bestimmt werden, dass das Integral maximal ist.\footnote{Vgl. \cite{lehrbuch}}
+
+Bis weit in das 19. Jahrhundert wurde Mathematik noch auf einem sehr intuitivem Fundament betrieben. 
+Der zunehmende Ruf nach Formalisierung in der Mathematik, ausgelöst durch die Entdeckung damals intuitiv undenkbarer stetiger, aber nirgendwo differenzierbarer Funktionen\footnote{Vgl. Weierstrass-Funktionen und weitere stetige indifferenzierbare Graphen}, führt heutzutage zur Notwendigkeit einer deutlich präziseren Formulierung im Vergleich zu Bernoullis Zeiten.\footnote{Vgl. \cite{georgi}}
+
+Um dem gerecht zu werden, verwenden wir folgende Version des Problems:
+
+
+\begin{equation}\label{(1.1)}
+  \begin{gathered}
+   \forall \,A\,(x_0,y_0), B\,(x_1,y_1) \in \mathbb{R}^2, \,\text{sodass } x_0 < x_1,\, y_1<y_0 \\
+   \exists \, f:[x_0,x_1] \to \mathbb{R}: \\
+   \mathfrak{I}(f)=\int_{x_0}^{x_1}F\left(x,f\left(x\right),
+   f'\left(x\right)\right) \, \dd t\, \text{min.}
+  \end{gathered}
+\end{equation}
+
+
+\begin{quote}
+ \textquotedblleft Es seien zwei Punkte $A$ und $B$ einer über dem Boden senkrechten Ebene vorgegeben, die nicht vertikal übereinander liegen. Man finde, falls möglich, diejenige Kurve, die die beiden Punkte $A$ und $B$ so verbindet, daß ein Massenpunkt, der in $A$ mit Geschwindigkeit $0$ startet und längs dieser Kurve unter dem Einfluß [sic] der Schwerkraft unter Vernachlässigung von Reibungskräften von $A$ nach $B$ gleitet, in der kürzest möglichen Zeit in $B$ eintrifft.\textquotedblright  \footnote{\cite{weihnachtsübung}}
+ %\footnote{Nieper-Wißkirchen, Prof. Dr. Marc, Stoll, Lukas M. Sc.: Weihnachtsübung zur Analysis III. 06. Dezember 2022 - 12.Januar 2023. Universität Augsburg Wintersemester 2022/23}
+\end{quote}
+
+Nach Ablauf der in den \textit{Acta} festgelegten und wohl aufgrund der Schwierigkeit auch verlängerten Abgabefrist erhält Bernoulli fünf Antworten, unter anderem von Newton, Leibniz, und seinem eigenen Bruder. 
+Newton, der das Problem in einer Nacht gelöst haben soll, soll angemerkt haben, ihm gefiele es nicht, von Ausländern bezüglich mathematischer Fragestellungen belästigt und geneckt zu werden.\footnote{Nach einer Legende.} 
+
+Alle ursprünglich eingereichten Lösungen scheinen im Vergleich zu der heutigen Herangehensweise jedoch ziemlich unelegant: 
+Etwa ein Jahrhundert später entwickeln Euler und Lagrange ein Verfahren zur Lösung des Brachistochronenproblems und vieler anderer Probleme aus der Variationsrechnung: 
+die \textit{Euler--Lagrange-Gleichung}. 
+
+Diese ist ein häufig angewendetes und Mathematikstudent*innen bekanntes Verfahren zur Lösung von Differentialgleichungen.
+In unserem Fall hilft sie, eine Aussage über in solchen Fragestellungen vorkommende Funktionen zu tätigen, also Funktionen deren Vorschrift nicht bekannt ist.
+Euler--Lagrange ist der Schlüssel zu dem Verlauf eines Fluges durch Raum-Zeit-Krümmung in der Relativitätstheorie, der eine geodätische Linie bildet, dem Aussehen einer perfekten Rutsche oder auch einer hinsichtlich der Fläche optimierten String-Bewegung.\footnote{Dank Adrian ist die gesamte Mathematik dieser Arbeit auch als Grundlage für elementare Stringtheorie und somit ohne größeres Umdenken auch als Grundkonzept für die Berechnung einfacher Stringbewegungen verwendbar!} 
+
+Und zu Bernoullis eigener Lösung:
+Ganze zwölf Jahre später veröffentlicht Bernoulli seine eigene Lösung, die sich jedoch als unvollständig und teils falsch herausstellt, und versucht deshalb, die seines älteren Bruders als seine eigene auszugeben.
+
+\section{Variationsrechnung}
+
+Die Frage nach der Brachistochrone ist Leuchtturmprojekt des sich zu dem Zeitpunkt gerade erst entwickelnden Zweiges der Variationsrechnung. 
+Hier geht geht es um Probleme in der Analysis, die durch eine Veränderung, sprich Variation, der gesamten zu betrachtenden Funktion gelöst werden.
+
+Variationsrechnung ist heutzutage immer noch ein hochaktuelles Thema - auf der Liste der Hilbertschen Probleme, die zu derem Vorstellungszeitpunkt auf dem Internationalen Kongress der Mathematik 1900 noch alle ungelöst waren, findet man ganze zwei, die sich damit beschäftigen. 
+Das 19. Problem lautet "`Sind alle Lösungen von regulären Variationsproblemen analytisch?"' und wurde erst in den 50er Jahren gelöst.\footnote{Spoiler: Ja, unter bestimmten Bedingungen.}
+
+Das andere Problem, das die Variationsrechnung zum Thema hat, trägt die Nummer 23 und ist somit das letzte offizielle. 
+Hier stellt Hilbert die Frage "`Wie können die Methoden der Variationsrechnung weiterentwickelt werden?"' -
+dieses Problem kann aufgrund seiner vagen Fragestellung nicht gelöst werden, zeigt allerdings, für wie wichtig große Mathematiker wie Hilbert Variationsrechnung hielten und wie viele Fragen in diesem Kontext eigentlich noch offen stehen.
+
+%Das Problem der Brachistochrone ist relativ einfach formulierbar, erfordert allerdings die Verwendung mehrerer Differentialgleichungen und wird leicht unübersichtlich. 
+%Statt auf Bernoullis eigene oder eine der eingesandten Lösungen einzugehen, werden wir die Errungenschaften seines Schülers Leonhard Euler verwenden und mithilfe von Euler--Lagrange einen eleganteren und gymnasial-gerechten Beweis durchführen.
+
+\section{Motivation}
+
+Rutschen, meist auf Spielplätzen, sind ein im Alltag vieler Kinder prävalentes Thema, und die Frage nach der schnellsten ist eine, auf die viele Kinder im Spiel intuitiv schon selbst kommen. 
+Derartige sozialkollektive Erfahrungen können gut als Einführung genutzt werden.
+%In der Mathematik gibt es häufig das Konzept einer relativ schwierigen Erklärung für intuitiv simple Konzepte, wie beispielsweise das Finden einer \textit{kürzesten} Strecke zwischen zwei Punkten, was eine Gerade bzw. \textit{geodätische Linie} in höheren Dimensionen und gekrümmten Räumen ist. Auch in diesem Fall wird der Beweis über die Euler--Lagrange-Gleichung geführt.
+%Davon kann also auch eine viel genereller anwendbare Herangehensweise an mathematische Fragestellungen abgeleitet werden.
+
+Das Ziel dieser Arbeit ist auf der Meta-Ebene, kostenlos verfügbare Information derart aufzubereiten, dass sie für Oberstufenschüler*innen auch ohne Studium nachvollziehbar sind, und zu zeigen, dass ein Zugang zu Konzepten der höheren Mathematik für Interessierte möglich ist. 
+Durch einen früheren Aufgriff scheinbar komplizierterer mathematischer Strukturen kann man im Gymnasialunterricht Interesse an höherer Mathematik wecken und möglicherweise einen einfacheren Übergang zur Universitätsmathematik schaffen.
+\newpage
+
+\chapter{Vorüberlegungen}
+\section{Intuitive schnelle Formulierung}
+ Wir formulieren das Problem folgendermaßen um:
+Wir suchen die schnellstmögliche Rutsche zwischen zwei Punkten $A$ und $B$ aus \ref{(1.1)} in einem zweidimensionalen Koordinatensystem, also dem $\mathbb{R}^2$, in dem die Gravitationskraft in $-y-$Richtung wirkt.
+
+ \section{Anfangsbedingungen} \label{anfang}
+ \paragraph{Auf $f$-Ebene.} \label{anfangsf}
+ Wir nehmen eine perfekte Rutschfunktion namens $f$ an. $f$ sei auf dem Intervall $\left[x_0,x_1 \right]$ so definiert, dass $f(x_0)=y_0$ und $f(x_1)=y_1$ gelten und somit $A$ und $B$ darauf liegen.
+ Außerdem soll für die Startgeschwindigkeit $v_0=x'=0$ gelten. 
+ Reibung wird vernachlässigt.
+
+Wir können auch Funktionen ausschließen, die komplett überhalb der Gerade durch $x_0$ und $x_1$ liegen, da die Gerade intuitiv schneller ist als diese. 
+ 
+ \paragraph{Auf $F$-Ebene.}
+ Sei $f$ hinreichend stetig und differenzierbar. 
+ 
+ \paragraph{Auf $\mathfrak{I}$-Ebene.}
+ Das Funktional, dass wir aufstellen müssen, erfülle hinreichend alle Eigenschaften, die wir von ihm verlangen (vornehmlich aber Stetigkeit und Differenzierbarkeit). Dies ist aber kein Problem und wird nur der Form halber erwähnt.
+
+
+\chapter{Mathematische Grundidee}
+
+\section{Zeitlich beschreibende Ordnungsvorschriften}
+Wie können wir an die Brachistochrone mathematisch herangehen? Intuitiv fordert man eine Art an Extremum, da man unter allen möglichen Rutschen die schnellste finden will. Bei unserem Problem kann dies trivialerweise nur ein Minimum sein.\footnote{Eine kurze Klarstellung: wir können kein Maximum erwarten, da sich immer eine Rutsche finden lässt, die noch länger dauert als was wir als Maximum bestimmen. Es kann auch somit immer eine schnellere Rutsche geben, nämlich die Gerade, vgl. auch \ref{anfang}.}
+
+Es existiert eine Ordnungsvorschrift, bei der wir für jede mögliche Rutsche ihre Rutschdauer messen und ihr durch eine Funktion zuordnen. 
+Diese Funktion wird als Eingabe keine Zahlen oder Variablen bekommen wie in der Schulmathematik, sondern mit anderen Funktionen hantieren, nämlich denjenigen, die die Rutschenform beschreiben. 
+
+Da die Form der Rutsche noch nicht bekannt ist, ist auch noch nicht klar, was genau eingegeben wird. 
+Die Ausgabewerte sind Zahlen, die die Rutschdauer angeben.
+Würden wir uns ein Koordinatensystem vorstellen, würden die Koordinaten jedes Punktes zu einer Funktion und deren Rutschwert gehören.\footnote{Problem: Welche Funktionen sind größer oder kleiner als andere Funktionen? Hier könnte man eine Norm einführen. Da unser Koordinatensystem jedoch ein Vektorraum ist und damit ohnehin unendlich-dimensional, also auch schlecht vorstellbar, ist, müssen wir uns einfach damit anfreunden, dass Punkte nicht mehr durch $(x,y)$ sondern als $(f(x), F(x)) \,$ beschrieben werden. Deswegen soll auch eine Beschreibung der Koordinatenachsen vermieden werden.}
+
+
+Diese Ordnungsvorschrift wird durch ein Funktional $\mathfrak{I}$ dargestellt.
+
+\begin{equation}
+ \begin{gathered}
+   \mathfrak{I}\colon
+   { \{\text{Funktionen}\}} \rightarrow {\mathbb{R}} \\ 
+    f \mapsto \int_{x_0}^{x_1} F(x, f(x), f'(x))
+ \end{gathered}
+\end{equation}
+
+
+Wir nehmen also ein bestimmtes $f$ und schicken dieses auf die Auswertung des Funktionswerts, der durch $F(x,f, f')\,$ beschrieben wird. Dieser Vorgang bildet nach $\mathbb{R}$ ab. 
+Dies gilt erst einmal generell für verschiedene Arten an Funktionen, denen Werte zugeordnet werden. 
+Deswegen wissen wir wie auch bei $f$ noch nicht, wie genau unser $F$ aussieht - dies wird in \ref{F in the chat} hergeleitet.
+
+Da $\mathfrak{I}$ eine Funktion höherer Ordnung ist, kann man sie graphisch nur in einem Vektorraum darstellen. 
+Das sieht dann ungefähr so aus:
+\begin{figure}[ht]
+ \centering
+ \includegraphics[scale=0.9]{wsem_graphik_8}
+ \caption[Leerer Vektorraum. TikZ - eigene Arbeit.]{Der Vektorraum aller Funktionen - hierin stellen wir $\mathfrak{I}$ graphisch dar.}
+ \label{fig:vektfunc}
+\end{figure}
+
+Um zu der Idee des Extremums zurückzukommen: in der graphischen Vorstellung von $\mathfrak{I}$ gibt es ein Extremum, das die gesuchte Funktion anzeigt. 
+
+In einem kleinen Gedankenexperiment schauen wir uns nun den Verlauf des Graphen von $\mathfrak{I}$ fast direkt bei diesem Minimum an: geht man ein sehr kleines Stückchen nach links oder rechts, dann hat sich der Graph fast nicht verändert und der $F$-Wert ist immer noch fast genau gleich. 
+%So unwichtig diese Erkenntnis auch scheint, ist es hier die kritische Idee.
+
+\begin{figure}[ht]
+ \centering
+ \includegraphics[scale=0.9]{wsem_graphik_7}
+ \captionsetup{justification=centering}
+ \caption[Lokale Optima. TikZ - eigene Arbeit.]{Bei einem Optimum hat ein Graph immer noch fast genau den gleichen Ausgabewert.}
+ \label{fig:extrema_normal}
+\end{figure}
+
+
+Dies ist man auch von Extrema in Polynomfunktionen gewohnt und eine relativ gute Beschreibung der Vorgehensweise bei der Suche nach einem Minimum, wenn wir nicht die Funktionsvorschrift und demnach auch die Nullstellen der Ableitung nicht kennen.
+
+In formale Schreibweise übersetzt, bedeutet dies: wir suchen ein
+\begin{equation}
+\mathfrak{I}(F)= \int_{x_0}^{x_1} F(x, f(x), f'(x) ) \,\dd x. 
+\end{equation}
+
+Hierbei verwendet man Anfangsbedingungen aus \ref{anfang}: $x_0,x_1$ sind die Grenzen des Integrals und was wir als Start- und Endpunkte der Rutsche definiert haben.
+
+\subsection*{Beispiel}
+\paragraph{$F(x,f,f')=F(x,q,q')=x^2.$}
+In diesem Fall fällt die Schwierigkeit an $\mathfrak{I}$ weg, da wir ein sehr einfaches $F$, das nur von $x$ abhängt, betrachten. Daher ist $\mathfrak{I}$ auch leicht findbar und lautet
+\begin{equation}
+\mathfrak{I} \colon f \mapsto \int_{x_0}^{x_1} x^2 \,\dd x.
+\end{equation}
+
+
+
+\paragraph{$F(x,f,f')=F(x,q,q')=\frac{1}{2}{(q')}^2.$} Hier hängt $F$ auch von der ersten Ableitung einer $f$-ähnlichen Funktion $q$ ab. Daher nimmt $\mathfrak{I}$ folgende Form an:
+\begin{equation}
+\mathfrak{I} \colon f \mapsto \int_{x_0}^{x_1} \frac{1}{2} {f'(x)}^2 \,\dd x.
+\end{equation}
+Wir dürfen immer Konstanten im Integral durch Umformung vor das Integral ziehen, weswegen wir $\mathfrak{I}$ auch so schreiben können:
+
+\begin{equation}
+ \mathfrak{I} \colon f \mapsto \frac{1}{2} \int_{x_0}^{x_1} {f'(x)}^2 \,\dd x.
+\end{equation}
+
+Dass wir Konstanten vor das Integral ziehen können, scheint momentan noch nicht viel zu bringen, wird später aber nützlich sein.
+
+\section{Beschränkung auf bestimmte $f$}
+Das Funktional $\mathfrak{I}$ nimmt momentan alle möglichen Funktionen unter der Gerade zwischen den beiden Punkten und schickt diese auf eine Zahl aus $\mathbb{R}$.
+Das sind jedoch viel zu viel für die momentane Rechnung: wir wollen nur bestimmte $f$ und $F$ betrachten, die uns überhaupt hilfreiche Ergebnisse liefern können. 
+
+\subsection{Familie an $f$ der Form $f+\epsilon\cdot\eta$}
+Stellen wir uns den Graphen von $f$ vor (muss er in einem kartesisch Koordinatensystem liegen?)\footnote{Ja, da $f$ von $\mathbb{R}$ nach $\mathbb{R}$ abbildet.}. 
+Dann können wir eine Funktion $g$ dadurch beschreiben, dass wir in dem vorgegebenen Intervall jeden Funktionswert von $g$ folgendermaßen darstellen:
+
+\begin{equation} \label{f+eh}
+ g= f + \epsilon \cdot \eta.
+\end{equation}
+Hierbei ist $\epsilon$ konstant und $\eta$ eine weitere Funktion. 
+Ziel hierbei ist, $\mathfrak{I}(g)$ durch $\mathfrak{I}(f)$ darstellen zu können, also Veränderungen an $f$ zu beschreiben.
+
+
+\subsection{Vorstellung von $\mathfrak{I}$ in einem Vektorraum}
+
+Um alle möglichen und sinnvollen $f$ zu beschreiben, können wir uns nochmal ein Koordinatensystem vorstellen. 
+In diesem steht jeder Punkt für eine bestimmte Funktion. 
+Da in diesem Raum alle erdenklichen Funktionen einen Punkt erhalten, liegt $f$ auch darin. 
+All die Punkte haben auch einen gewissen Vektor, der sie darstellt. 
+Das heißt, $f$ besitzt auch einen.\footnote{ Wir gehen hier wieder intuitiv von einem Vektorraum aus, ohne dies explizit einzuführen. Deswegen können die Koordinatenachsen auch keine hierfür sinnvolle Beschriftung erhalten.}
+
+\subsection{Funktionenaddition im Vektorraum}
+In diesem Koordinatensystem existiert auch die Funktion $\eta$, die wir in der Gleichung \ref{f+eh} eingeführt haben.
+
+\begin{figure}[ht]
+ \centering
+ \includegraphics[scale=0.9]{wsem_graphik_1.pdf} 
+ \caption[Funktionen im Vektorraum. TikZ - eigene Arbeit.]{$f$ und $\eta$ im Vektorraum}
+ \label{fig:f&eta} 
+\end{figure} 
+
+Was passiert, wenn wir $\eta$ und $f$ addieren?
+
+Da beide Funktionen in dem Raum aus Vektoren dargestellt werden können, ist dies möglich und wir erhalten den Punkt und Vektor für die Funktion $f+\eta$. Diese Addition kann noch ein paar mehr Mal durchgeführt werden, und wir können auch eine gewisse Anzahl an $\eta$ abziehen.
+
+
+\begin{figure}[ht]
+ \centering
+ \includegraphics[scale=0.9]{wsem_graphik_2.pdf} 
+ \caption[Addition im Vektorraum. TikZ - eigene Arbeit.]{$f+ \eta$ im Vektorraum}
+ \label{fig:f&eta2} 
+\end{figure} 
+
+
+Somit erhält man in dem Koordinatensystem eine Gerade durch $f$ mit der Steigung, die $\eta$ zum Ursprung hatte. Um zu beschreiben, wie sehr wir $f$ um $\eta$ verändern, führen wir die Konstante $\epsilon$ ein und wählen ein $\epsilon \in \mathbb{R}$.
+
+\subsection{Geradenfunktionen im Vektorraum}
+Also wird der Punkt in dem Raum, der durch $f+3\cdot \eta$ erreicht wurde, durch $\epsilon=3$ und $\eta$ beschrieben. Hierbei ist $f$ fest und nicht von $\epsilon$ oder $\eta$ abhängig. Nun kann man die Gerade, die durch Addition und Subtraktion aller möglichen $\epsilon\cdot \eta$ in dem Raum entsteht, durch folgende Gleichung beschreiben:
+
+\begin{equation} \label{funktionalgerade}
+ \mathfrak{G}(\epsilon)=f+\epsilon \cdot \eta.
+\end{equation}
+
+
+
+Hier liegt wieder eine Ordnungsvorschrift vor, die sich Funktionen nimmt und ihnen Werte zuteilt, also ein Funktional. 
+Durch diesen mathematischen Trick ist eine deutliche Vereinfachung der Fragestellung nun erreicht worden:
+anstatt ein Funktional zu behandeln, das von mehreren Variablen und deren Ableitungen abhängt, können wir jetzt $\mathfrak{G}$ nur von $\epsilon$ abhängig machen.
+
+Denn jetzt liegt eine Gleichung für eine lineare Funktion der Art $y= mx + t$ vor, und unsere neue Variable hier ist $\epsilon$. 
+Wir kommen darauf, dass $\epsilon$ unsere Variable ist, indem wir uns anschauen, welche Punkte wir gerne welchen $\mathfrak{G}$-Werten zuordnen wollen würden:
+
+\begin{enumerate}
+ \item Der Punkt $f$ sollte intuitiv $\mathfrak{G}(0)$ zugeordnet bekommen.
+ \item Der Punkt $f+ 1\eta$ sollte $\mathfrak{G}(1)$ zugeordnet bekommen.
+ \item Der Punkt $f-27 \eta$ sollte $\mathfrak{G}(-27)$ zugeordnet bekommen usw.
+\end{enumerate}
+
+Wir können eine klare Abhängigkeit von der Anzahl der addierten $\eta$ erkennen. 
+Deren Anzahl beschreiben wir durch $\epsilon$, also ist $\mathfrak{G}$ auch nur von $\epsilon$ abhängig.
+
+%Ganz so einfach ist es jedoch nicht: 
+%denn da $\epsilon$ von $\eta$ abhängig ist und die Anzahl der addierten $\eta$ beschreibt, ist $\mathfrak{G}$ immer noch über die Abhängigkeit von $\epsilon$ auch von $\eta$ abhängig. 
+%Das ist allerdings nicht schlimm.
+%$\mathfrak{G}$ nimmt also als Input ein gewisses $\epsilon$ an und schickt dieses auf das zugehörige $f+\epsilon \cdot \eta$, wobei hier $f$ und $\eta$ konstante Funktionen sind.
+
+\section{Können wir $\mathfrak{I}$ doch graphisch darstellen?} \label{Igraphisch}
+
+Erinnern wir uns zurück an 
+$$
+\mathfrak{I}(F)= \int_{x_0}^{x_1} F\left(x, f(x), f'(x) \right) \,\dd x. 
+$$
+
+Angenommen, wir wollen ein Optimum einer Funktion erster Ordnung finden: dann suchen wir sowohl graphisch als auch rechnerisch eine lokale Nullstelle der Ableitung. 
+Dies funktioniert allerdings nicht bei $\mathfrak{I}$, was ja von zweiter Ordnung 2 hat. 
+
+Dennoch können wir einige Konzepte darauf übertragen.
+Für $\mathfrak{I}$ bedeutet das Finden eines Optimums, dass bei einer kleinen Veränderung dieser optimalen Funktion $f$ fast keine Veränderung des $\mathfrak{I}$-Wertes stattfindet.\footnote{Vgl. auch Graphik \ref{fig:extrema_normal} für eine intuitiv graphische Vorstellung.}
+Umgekehrt: wenn das Optimum noch unbekannt ist, und eine Stelle auffällt, in deren Umgebung sich der $\mathfrak{I}$-Wert fast nicht verändert, hat man eine optimale Funktion $f$ gefunden.
+
+\subsection{Optima geradenähnlicher Funktionen in Vektorräumen}
+Wir kehren zu unserem Funktional $\mathfrak{G}= f + \epsilon \cdot \eta$ zurück. 
+Versucht man mit den Überlegungen aus \ref{Igraphisch}, ein Optimum für $\mathfrak{G}$-Werte zu finden, kann man folgendes erkennen:
+$$
+\mathfrak{G}(0)=0 \hspace{4pt} \text{soll für alle möglichen $\eta$ gelten.}
+$$
+Um herauszufinden, dass $f$ optimal ist, muss man nämlich nicht nur die Gerade eines bestimmten $\eta$ abgehen, sondern alle möglichen $\eta$ in Betracht ziehen und sicherstellen, dass $f$ für alle ein Optimum darstellt. Dadurch tasten wir langsam aber sicher den gesamten Vektorraum, in dem $f$ ein Punkt ist, ab.
+
+\begin{equation}
+ f \hspace{3pt}\text{ist optimal} \Rightarrow \mathfrak{G}_{\eta}(0)=0.
+\end{equation}
+
+Die Beziehung zwischen den beiden Funktionalen $\mathfrak{G}$ und $\mathfrak{I}$ können wir nun folgendermaßen darstellen:
+
+\begin{equation} \label{i&g}
+\mathfrak{G}_{\eta}(\epsilon)
+=\mathfrak{I}(f+\epsilon \cdot \eta)
+\end{equation}
+
+\subsection{Herleitung}
+Zuerst wollen wir die Ableitung von $\mathfrak{G}$ ausdrücken.
+Wir wollen für alle $\eta$ wir bei der Stelle $\epsilon=0$ ein Optimum haben.
+
+\begin{equation}
+ \mathfrak{G}'_{\eta}(\epsilon)
+ = \frac{\dd}{\dd\epsilon} 
+ \color{black}{\hspace{4pt} \mathfrak{G}_{\eta}(\epsilon)\vert_{\epsilon=0} 
+ \overset{!}{=} 0}. \hspace{2pt}
+ \overset{\ref{i&g}}{\Rightarrow} \hspace{2pt} \mathfrak{G}'_{\eta}(\epsilon)
+ = \frac{\dd}{\dd\epsilon}  \hspace{4pt}
+ \mathfrak{I}(f+\epsilon \cdot \eta) \vert_{\epsilon=0}.
+\end{equation}
+
+Wir können jetzt $\mathfrak{I}$ auch noch einmal ausschreiben und für $F$ wie in den Beispielen $f+ \epsilon \cdot \eta $ einsetzen.
+
+\begin{equation} \label{g+integrali}
+ \mathfrak{G}'_{\eta}(0)
+ = \frac{\dd}{\dd\epsilon} \vert_{\epsilon=0} \hspace{4pt} \int_{x_0}^{x_1} F(x, f(x)
+ + \epsilon \cdot \eta, f'(x) 
+ + \epsilon \cdot {\eta}')\,\dd x.
+\end{equation} %\footnote{Noch herausfinden: Striche vor epsilon=0 größer?}
+
+Hierbei muss Acht darauf gelegt werden, dass $\eta$ ja ebenfalls eine differenzierbare Funktion ist. 
+Ähnlich wie bei dem Herausziehen eines konstanten Faktors aus dem Integral können wir jetzt den Vorfaktor $\frac{\dd}{\dd\epsilon}$ aus \ref{g+integrali} in das Integral hereinziehen\footnote{Generell können wir nicht Ableitung und Integral vertauschen. 
+Es gibt ein paar Gründe, warum wir es hier machen können, nämlich unter anderem die Differenzierbarkeit von $F$, die Beschränkung von $F$ durch eine integrierbare Funktion und dass $F$ gut durch Polynome näherbar ist. 
+Generell ist eine solche Umformung mit großer Vorsicht durchzuführen.} und erhalten:
+
+\begin{equation} \label{g+wholeintegral}
+ \mathfrak{G}'_{\eta}(0)= 
+ \int_{x_0}^{x_1} 
+  \frac{\dd}{\dd\epsilon} \vert_{\epsilon=0} \hspace{4pt}
+ F\left(x, f(x)+ \epsilon \cdot \eta, f'(x) + \epsilon \cdot {\eta}' \right) \,\dd x.
+\end{equation} 
+
+
+Formt man um, entsteht 
+\begin{equation}
+ \begin{gathered}
+ \int_{x_0}^{x_1} 
+  {\frac{\dd}{\dd\epsilon}\vert_{\epsilon=0}
+  }   
+  \hspace{4pt}
+   F\left(x, f\left(x\right)+ \epsilon \cdot \eta, f'\left(x\right) 
+   + \epsilon \cdot {\eta}'\right) \,\dd x  
+    = \int_{x_0}^{x_1} \left( \frac{\dd\mathfrak{I}}{\delta f}\eta 
+    - \frac{\delta \mathfrak{I}}{\dd f'}\eta'\right) \,\dd x. 
+ \end{gathered}
+\end{equation}
+
+Dies ist jetzt eine Gleichung, die umgeformt werden kann und dann eine hilfreiche Aussage über $f$ trifft, sodass wir wissen, welche Form unsere Rutsche hat. 
+Die Umformung der Gleichung wird in den Kapiteln \ref{ch4} und \ref{ch5} vorgehen, sodass wir in Kapitel \ref{ch6} endgültig die Form unserer Rutsche berechnen können!
+
+\newpage
+
+\chapter{Und was jetzt? Die Euler--Lagrange-Gleichung}\label{ch4}
+
+Zwei Definitionen vorweg:
+
+\textbf{Notwendige Bedingung.} Eine Bedingung, ohne die ein Ereignis nicht eintritt. 
+Für das Würfeln einer Augenzahl zwei muss mindestens einmal überhaupt gewürfelt werden.
+
+\textbf{Hinreichende Bedingung.} Eine Bedingung, unter der das Ereignis auf jeden Fall eintritt (intuitiv: sie könnte auch zu viel sein). 
+Würde man unendlich oft würfeln können, wäre mindestens einmal die Augenzahl zwei dabei sein.
+
+Eine notwendige Bedingung dafür, dass $f$ optimal ist, ist:
+$f$ hat die kleinste Rutschzeit, ist also zeitlich optimal, unter allen $\{f+\epsilon \eta\}$. 
+Dies ist eindimensionale Familien von Funktionen, die $f$ auf eine bestimmte Art und Weise (spezifisches $\eta$) bestimmt stark (variiertes $\epsilon$) verändern.
+
+Damit f insgesamt optimal ist, müssen alle Änderungen der Art $f+\epsilon \eta$ weniger optimale Funktionen ergeben.
+
+\begin{equation}
+\forall \, \eta: f \text{ optimal unter allen } \{f+\epsilon \eta\}.
+\end{equation}
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[scale=0.9]{images/wsem_graphik_9 (1).pdf} 
+ \caption[Subtraktion im Vektorraum. TikZ - eigene Arbeit.]{$f$ und $g$ im Vektorraum.}
+ \label{fig:f+e=g} 
+\end{figure}
+
+Angenommen $g$ ist eine bessere Rutsche als $f$, dann:
+$\epsilon=g-f$ und $g= f+1 \cdot \epsilon$
+Somit ist $g$ wieder durch eine Art der Veränderung an $f$ darstellbar und muss abgelaufen sein worden und wäre damit das neue optimale $f$.
+
+Anmerkung: $g(x)=f(x)+ \epsilon \cdot \eta$.
+
+\begin{equation}
+ \text{Wie wird }\int_{x_0}^{x_1} F(x,g(x)\, g'(x)\,) \text{ minimal?}
+\end{equation}
+
+
+Da $f$ und $\eta$ beide konstante Funktionen sind, hängt diese Funktionsvorschrift, in der wir einem bestimmten $\epsilon$ dessen zugehörigen $\mathfrak{I}-$Wert zuordnen, auch nur von $\epsilon$ ab. 
+Wir können somit eine Funktion finden, die das Problem gut beschreibt, aber nur von einer Variablen abhängt. 
+
+\begin{equation}
+ \begin{gathered}
+  I[\cdot] \colon {\{\text{Funktionen}\}} \to \mathbb{R}.\\
+ \epsilon \mapsto I[f+\epsilon \eta] \colon \mathbb{R} \to \mathbb{R} 
+ \eqqcolon \mathfrak{G}(\epsilon).
+ \end{gathered}
+\end{equation}
+
+Wir müssen dennoch alle möglichen $\epsilon$ durchlaufen, damit wir jede Änderung an unserem perfekten $f$ betrachten. 
+Bedingung für ein optimales $f$ ist ein lokales Extremum (genauer, ein Minimum) bei $\epsilon=0$.
+Diese können bestimmt werden, wenn wir $\mathfrak{G}$ ableiten.
+
+\begin{equation}\label{(1)}
+  \,\mathfrak{G}(\epsilon)\overset{!}{=}0 = \frac{\dd}{\dd\epsilon} \mathfrak{I}(f+\epsilon \eta) 
+ = \int_{x_0}^{x_1} \frac{\dd}{\dd\epsilon} F(x,f+ \epsilon \eta, f'+ \epsilon \eta') \,\dd x.
+\end{equation}
+
+Wir lösen jetzt das $\frac{\dd}{\dd\epsilon}$ auf. Hierzu muss man überlegen, wie sehr $F$ von den einzelnen Variablen abhängig ist.
+Es folgt durch Ketten- und Produktregel
+
+\begin{equation}
+ \ref{(1)} = \int_{x_0}^{x_1}
+  \left(
+  \frac{\partial F}{\partial f} \cdot \frac{\partial\left( f(x)+ \epsilon \eta(x)\right)}{\partial \epsilon} +
+  \frac{\partial F}{\partial f'} \cdot \frac{\partial \left(f'(x)+\epsilon \eta'(x)\right)}{\partial \epsilon} \,\dd x
+  \right).
+\end{equation}
+
+\section{Partielles Ableiten nach $f'$}
+
+\begin{equation}\label{(2)}
+ \frac{\partial F}{\partial f'} \eta 
+ = \left(\frac{\partial F}{\partial f'} \cdot \eta\right)'
+ - \left(\frac{\partial F}{\partial f'}\right)' \cdot \eta.
+\end{equation}
+
+Aus \ref{(2)} folgt nun durch das Einsetzen ins Integral
+
+\begin{equation}\label{(3)}
+ \int_{x_0}^{x_1} \frac{\partial F}{\partial f'} \cdot \eta'\dd x 
+ = \int_{x_0}^{x_1} \left(\frac{\partial F}{\partial f'}\eta'\right)'\dd x 
+ - \int_{x_0}^{x_1} \left(\frac{\partial F}{\partial f'}\right)' \cdot \eta \,\dd x.
+\end{equation}
+
+\section{Hauptsatz der Differential- und Integralrechnung}
+
+
+\begin{equation}\label{(4=HDI)}
+ \int_{x_0}^{x_1} \left(\frac{\partial F}{\partial f'} \eta \right)'
+ = \left[\frac{\partial F}{\partial f'}\eta\right]_{x_0}^{x_1}=0
+\end{equation}
+
+Die Veränderung um $\eta$ soll ja nicht den Anfangs- und Endpunkt verschieben, weswegen dessen Stammfunktion an den Stellen $x_0, x_1$ gleich $0$ ist.
+
+\section{Partielle Ableitung von $F$ nach $f$}
+
+Setzen wir nun \ref{(4=HDI)} in \ref{(2)} ein, erhalten wir
+
+\begin{equation}\label{(5)}
+ % (5) \Rightarrow 
+ \int_{x_0}^{x_1} \frac{\partial F}{\partial f'} \eta' \,\dd x 
+ = - \int_{x_0}^{x_1} \left(\frac{\partial F}{\partial f'} \right)' \eta \,\dd x.
+\end{equation}
+
+Aus \ref{(1)} und \ref{(5)} folgt:
+
+\begin{equation}\label{(6vor)}
+ \Rightarrow \int_{x_0}^{x_1} \left(\frac{\partial F}{\partial f}- \left(\frac{\partial F}{\partial f'}\right)'\right) \eta \,\dd x \overset{!}{=} 0.
+\end{equation}
+
+Wir können nun die Ableitung des zweiten Teils als $\frac{\dd}{\dd x}$ umschreiben und erhalten dadurch
+
+\begin{equation}\label{(6=fastELG)}
+ \int_{x_0}^{x_1}\left(\frac{\partial F}{\partial f}-\frac{\dd}{\dd x}\frac{\partial F}{\partial f'}\right)\eta \,\dd x \overset{!}{=} 0.
+\end{equation}
+
+\section{Herleitung: Euler--Lagrange}
+Jetzt können wir den Euler--Lagrange-Formalismus herleiten.
+Es gelten folgende Bedingungen: 
+
+\begin{itemize}
+ \item \ref{(6=fastELG)} gilt für alle $\eta$
+ \item \ref{(6=fastELG)} ist von folgender Form:
+\end{itemize}
+
+\begin{equation}\label{(7)}
+ 0=\int_{x_0}^{x_1} p(x) \cdot \eta(x) \,\dd x.
+\end{equation}
+
+mit einem hinreichend differenzierbaren und stetigen $p(x)$.
+
+Was können wir nun über $p(x)$ sagen, wenn \ref{(7)} für alle $\eta$ gilt?
+
+%QUELLEEEEEEE !!
+\paragraph{\textbf{Fundamentallemma der Variationsrechnung.}}\label{fundamentallemma}
+
+Für jedes $x$ mit $p(x) \neq 0$ finden wir ein $\eta$ mit
+
+\begin{equation}\label{(7pre)}
+ \int_{x_0}^{x_1} p(x) \cdot \eta \,\dd x \neq 0.
+\end{equation}
+
+Da \ref{(7)} für alle $\eta$ gilt, müssen wir demnach $p(x)=0$, also gleich der Nullfunktion setzen:
+sonst können wir immer ein $\eta$ finden, dass dafür sorgt, dass das Integral aus \ref{(7pre)} nicht $0$ wird. 
+
+Anwendung des Fundamentallemmas aus \ref{(7pre)} auf \ref{(6=fastELG)}: \footnote{Vgl. \cite{weihnachtsübung}}
+
+\begin{equation}\label{(8=ELG)}
+ \left(\frac{\partial F}{\partial f}-\frac{\dd}{\dd x} \cdot 
+ \frac{\partial F}{\partial f'}\right)=0.
+\end{equation}
+
+Durch Umformung erhalten wir nun
+
+\begin{equation}\label{(8=umgeformtELG)}
+ \frac{\partial F}{\partial f}
+ = \frac{\dd}{\dd x} \cdot \frac{\partial F}{\partial f'}.
+\end{equation}
+
+\section{Fazit aus Kapitel 4}
+Damit $f$ Optimum bzw. Minimum von 
+$$I(f)= \int_{x_0}^{x_1} F(x,f(x)\,, f'(x)\,) \,\dd x $$
+ist, müssen die Gleichungen \ref{(8=ELG)} bzw. \ref{(8=umgeformtELG)} gelten.
+Diese sind nämlich verschiedene Formen der Euler--Lagrange-Gleichung, die wir hiermit hergeleitet haben.
+Diese Gleichung gilt generell für alle Arten an $f$ und $F$, aber wir setzen jetzt unsere bekannte Variable ein, nämlich $F$, die die Rutschzeit berechnet.
+Somit haben wir jetzt nur noch eine Gleichung mit einer Variablen.
+
+\chapter{Herleitung: Gleitzeit}\label{ch5}
+
+\section{Ein spezifisches $F$} \label{F in the chat}
+
+Um diese Gleichung umzuformen und durch Vereinfachung auf eine Lösung zu kommen, müssen wir uns allerdings noch Gedanken machen, wie unser spezifisches $F$ in diesem Fall aussieht.
+
+
+\begin{figure}[h]
+ \centering
+ \includegraphics[scale=0.9]{wsem_graphik_6.pdf} 
+ \caption[Steigungsdreieck. TikZ - eigene Arbeit.]{Wie können wir die Länge des Funktionsabschnittes beschreiben?}
+ \label{fig:d.x,d.y} 
+\end{figure}
+
+%Folgende Überlegung erklärt das spezielle $F$, das hier verwendet wird:
+Um die Länge eines bestimmten Funktionsabschnittes zu bestimmen, wählen wir an diesem einen kleinen Abschnitt $\dd x$ aus und finden die zugehörige Veränderung des Funktionswertes $\dd y$, wie in \ref{fig:d.x,d.y}.
+Da in dem Dreieck ein rechter Winkel vorliegt, können wir den aus dem Unterricht bekannten Satz des Pythagoras anwenden.
+Dann lautet die Approximation der Länge dieses bestimmten Funktionsabschnitts
+
+\begin{equation}
+ \sqrt{\dd x^2+\dd y^2}.
+\end{equation}
+
+Klammern wir nun $\dd x$ unter der Wurzel aus und formen mit $\frac{\dd y}{\dd x}=f'$, erhalten wir für die Länge des Graphens in einem Abschnitt $\dd x$
+
+\begin{equation}
+\sqrt{1+(f')^2}.
+\end{equation}
+
+
+Dies müssen wir allerdings noch mit etwas Physik verknüpfen, die besagt, wie lang ein Masseteilchen braucht, um eine bestimmte Rutschenlänge reibungslos herabzugleiten.
+
+\section{Kräfteverhältnisse}
+\begin{figure}[h]
+ \centering
+ \includegraphics[scale=0.9]{wsem_graphik_5 (1).pdf} 
+ \caption[Kräfteverhältnisse. TikZ - eigene Arbeit.]{Dies kennt man aus der Physik.}
+ \label{fig:kräfteverhältnisse} 
+\end{figure}
+
+Wir wollen auf $F_{vor}$ kommen und stellen dazu erst einmal ein paar trigonometrische Verhältnisse der Kräfte auf. 
+Sei $\alpha$ der Winkel zwischen dem Graphen und $\Vec{F}_{vor}$, der Vorwärtskraft, dann entspricht der Winkel zwischen $\Vec{}F_{vor}$ und $\Vec{F_t}$, der Tangentialkraft, $\pi - \alpha$. 
+Zwischen $\Vec{F_t}$ und $\Vec{F_g}$, der Gravitationskraft, hat der Winkel die Größe $\alpha - \frac{\pi}{2}$, und zwischen $\Vec{F_g}$ und $\vec{F_n}$, der Normalenkraft, die Größe $\pi - \alpha$.
+Es ist bekannt, dass $\Vec{F_g}=\Vec{F_n}+ \Vec{F_t}$ gilt. Verhältnisse für die Längen der Dreiecke sind hier:
+
+\begin{equation}\label{Ft/Fg}
+ \frac{F_t}{F_g}
+ = \cos \left(\alpha - \frac{\pi}{2}\right)= \sin(\alpha)
+\end{equation}
+
+Ein ähnliches Verhältnis kann auch zwischen $F_{vor}$ und $F_t$ festgestellt werden:
+
+\begin{equation}\label{Fvor/Ft}
+ \frac{F_{vor}}{F_t}
+ = \cos(\pi - \alpha)= -\cos(\alpha)
+\end{equation}
+
+
+Durch Multiplikation der beiden Gleichungen \ref{Ft/Fg} und \ref{Fvor/Ft} erhält man nun
+
+\begin{equation}\label{Fvor/Fg}
+ \frac{F_t \cdot F_{vor}}{F_g \cdot F_t}
+ = \frac{F_{vor}}{F_g}=-\sin(\alpha) \cdot \cos (\alpha)
+\end{equation}
+
+\paragraph{Graphische Herleitung von $tan(\alpha)=\frac{\dd y}{\dd x}=f'(x)$.}
+Siehe Graphik \ref{fig:d.x,d.y}.
+Nach bekannten Regeln kann trigonometrisch umgeformt werden.
+Löst man jetzt nach $\alpha$ auf und setzt dies in \ref{Fvor/Fg} einsetzen, folgt:
+
+$$
+ \frac{F_{vor}}{F_g}=-\sin(\arctan (f') \cdot \cos (\arctan(f'))
+$$
+
+\paragraph{Nebenrechnung.}
+$$\sin (\alpha)=\frac{G}{H}=\frac{f'}{\sqrt{1-f'^2}},$$ auch siehe Steigungsdreieck und Graphik \ref{fig:d.x,d.y}. 
+
+Daher gilt:
+
+\begin{equation}
+\frac{F_{vor}}{F_g}= - \sin(\alpha) \sqrt{1-\sin^2(\alpha)} = - \frac{f'}{\sqrt{1-f'^2}}\cdot \sqrt{1-\frac{f'^2}{1-f'^2}}\,.
+\end{equation}
+
+Da 
+
+\begin{equation}
+1-\frac{f'^2}{1-f'^2}= \frac{1}{1+f'(x)^2}
+\end{equation}
+
+gilt, gilt somit auch
+
+\begin{equation}
+ \frac{F_{vor}}{F_g}= - \frac{f'(x)}{1+f'(x)^2}.
+\end{equation}
+
+Nun müssen wir diese Aussage mit der Zeit $t$ verknüpfen, die es braucht, um ein Stück herabzurutschen.
+Dafür verwenden wir den \textit{Energieerhaltungssatz}.
+
+\section{Energieerhaltungssatz} 
+
+Bekannt ist $\frac{1}{2}mv^2=m\cdot g\cdot h$ in einem abgeschlossenen System.
+In unserem Falle lautet dies auch:
+
+\begin{equation}\label{Energieerhaltung1}
+ \frac{1}{2}m \left( x't)^2+y'(t)^2 \right) + m \cdot g\cdot f(x(t)).
+\end{equation}
+
+%Erwähnenswert ist dabei auch noch, dass wir Punkte auf dem Graphen nicht nur als $\left(x(t), y(t) \right)$, sondern auch als $\left(x(t), f(x(t)) \right)$ darstellen können
+
+Wenden wir dies nun auf \ref{Energieerhaltung1} an und verwenden ein wenig Kettenregel, ergibt dies
+
+\begin{equation}\label{Energieerhaltung2}
+ \frac{1}{2} \left( x'(t)^2 + f'(x(t))^2 \cdot x'(t)^2 \right) + mgf(x(t))
+ = \frac{1}{2} \left( 1+ f'(x(t))^2 \right) \cdot x'(t)^2 + mgf(x(t))
+\end{equation}
+
+und das muss laut unserer Voraussetzung folgendes erfüllen:
+
+\begin{equation}\label{Energieerhaltung3}
+ \frac{1}{2} \left( 1+f'(x(t))^2 \right) \cdot x'(t)^2 + mgf(x(t)) \overset{!}{=} m\cdot g\cdot y_0.
+\end{equation}
+
+Dies können wir umformen und erhalten somit
+
+\begin{equation}\label{FVorform}
+ x'(t)=\sqrt{\frac{2g\,(y_0-f(x(t))}{1+f'(x(t))^2}}.
+\end{equation}
+
+\paragraph{Alternative Methode.}Wir überlegen uns, wie wir die Kraft beschreiben.
+
+$$
+a=x''(t)= \frac{m \cdot a}{m}=\frac{F_{vor}}{m}=-\,\frac{f'(x)}{1+f'(x)^2} \cdot \frac{F_g}{m}.
+$$
+
+Dies können wir mit $x'(t)$ multiplizieren und integrieren, sodass wir wir auch auf \ref{FVorform} kommen würden.
+
+\paragraph{Was machen wir nun mit \ref{FVorform}?}
+
+Wir wollen eine Funktion, die aber die Zeit $t$ beschreibt und $x$ als Variable enthält; dies können wir uns durch eine Umkehrfunktion zu \ref{FVorform} basteln.
+Dafür müssen wir allerdings zwei Annahmen treffen:
+
+\begin{enumerate}
+ \item $x(t)$ ist streng monoton steigend, also wir laufen auf dem Graphen bei unserem Rutschen nur nach rechts und für uns vorwärts.
+ \item Es existiert eine Umkehrfunktion $t(x)$.
+\end{enumerate}
+
+Dann existiert ein $t'(x)$ mit der Eigenschaft dass
+
+\begin{equation} \label{FfastVorform}
+ t'(x)= \frac{\dd t}{\dd x} 
+ = \frac{1}{\frac{\dd x}{\dd t}}=\frac{1}{x'(t(x))}
+ = \sqrt{\frac{1+f'(x)^2}{2g \cdot (y_0 - f(x))}}\,.
+\end{equation}
+
+Wenn wir dies nun in dem von uns gewählten Abschnitt von $x_0$ bis $x_1$ integrieren, also
+
+\begin{equation}\label{FIntegriert}
+ T=\int_{x_0}^{x_1} \sqrt{\frac{1+f'(x)^2}{2g \cdot (y_0 - f(x))}},
+\end{equation}
+
+erhalten wir die Form unseres Funktionals $\mathfrak{I}$ mit unserem $F(x,f,f')$ in \ref{FfastVorform}.
+Wir haben das Problem fast gelöst und müssen nur noch das neue $F$ in die Euler--Lagrange-Gleichung einsetzen.
+Somit haben wir dann auch endlich unsere Rutschform in greifbarer Nähe. 
+
+%Wohoo!!!
+
+%anweisungen von marc: 
+%Um im konkreten Fall F zu bestimmen, musst du ein bisschen Physik machen. Du hast die Funktion f: [x0, x1] -> R, deren Graph die Rutsche an gibt. 
+%Dann soll F(x, f(x), f'(x)) das Inverse der Horizontal(!)-Geschwindigkeit am Ort x (zwischen x0 und x1) sein. 
+%Dann ist offensichtlich (?) F(x, f(x), f'(x))\dd x =: \dd t die Zeit, die es braucht, um von x zu x +\dd x zu rutschen. Das Integral von x0 bis x1 über F(x, f(x), f'(x))\dd x ergibt dann offensichtlich die Gesamtzeit.
+%Die totale Geschwindigkeit v an einem bestimmten Ort ergibt sich, in dem du die zugehörige kinetische Energie $\frac{1}{2} m v^2$ mit der potentiellen Energie m g h, die an diesem Ort umgewandelt worden ist, in Beziehung setzt. Die verlorene Höhe hängt von f(x) ab. 
+%Die Horizontalgeschwindigkeit ergibt sich dann aus der Projektion des Geschwindigkeitsvektors auf die x-Achse. Da die Richtung des Geschwindigkeitsvektors in Tangentialrichtung geht, hängt der Horizontalanteil von der Steigung, also von f'(x) ab. Damit wird F(x, f(x), f'(x)) sowohl von f(x), als auch von f'(x) abhängen.
+
+
+%\paragraph{Ausblick auf Kapitel 6: Welche Funktionen können überhaupt die ELG aus \ref{ch4} erfüllen?}
+%Wenn wir unser spezielles $F$ in \ref{(8=ELG)} einsetzen, erhalten wir eine momentan noch falsche Gleichung.
+%\begin{equation}
+% \frac{\partial \sqrt{1+(f')^2}}{\partial f}- \frac{\dd}{\dd x} \frac{\partial \sqrt{1+(f')^2}}%{\partial f'})=0
+%\end{equation}
+
+%Eigene tentative Überlegungen: Müsste der erste Term nicht wegfallen, da wir ja partiell nach f ableiten? Dann sollte ja dran stehen, dass beide Terme gleich 0 sein müssen. wofür wir also nur noch die rechte Seite der Gleichung gleich 0 stehen haben und somit uns überlegen können, was ...
+
+
+\chapter{Berechnung von $f$ durch Euler--Lagrange}\label{ch6}
+
+\section{Herleitung der Differentialgleichung}
+
+Wir erinnern uns zurück an die Euler--Lagrange-Gleichung:
+
+$$
+\frac{\partial F}{\partial f} = \frac{\dd}{\dd x}\cdot \frac{\partial F}{\partial f'}.
+$$
+
+Aus der Physik wissen wir, dass die Gesamtenergie eines abgeschlossenen Systems gleich bleibt, das heißt es gilt
+
+\begin{equation}
+ mgh + \frac{1}{2} mv^2 = \text{const.}
+\end{equation}
+
+%Unser $\mathfrak{I}$ sieht nach folgender Überlegung auch anders aus:
+
+%\begin{equation}
+% v=\frac{\dd x}{\dd t} \Rightarrow \frac{\dd x}{v}=\dd t \Rightarrow 
+%\mathfrak{I}= \int \dd t= \int_{x_0}^{x_1} \frac{1}{v}\,\dd x.
+%\end{equation}
+
+Die Form von $F$ lautet ja
+
+$$
+\sqrt{\frac{1+f'(x)^2}{2g \cdot (y_0 - f(x))}},
+$$
+
+aber da wir die gesamte Rutsche und somit auch ihre Anfangshöhe beliebig im $\mathbb{R}^2$ verschieben können, können wir $y_0$ auch so setzen, dass folgendes auch gilt:
+
+\begin{equation}
+ \mathfrak{I}= \int_{x_0}^{x_1} \sqrt{\frac{1+f'(x)^2}{2gf}}.
+\end{equation}
+
+%Was mache ich hier eigentlich.
+
+Was man nicht aus der Schule weiß, aber was aus der Euler--Lagrange-Gleichung mithilfe von Physik-Vorwissen folgerbar ist, ist 
+\begin{equation}
+ F - f' \cdot \frac{\partial F}{\partial f'} = \text{const.}
+\end{equation}
+
+Dies ist deutlich einfacher zu lösen als die tatsächliche Euler--Lagrange-Gleichung. 
+Nennt man die Konstante $c$ und setzt die partielle Ableitung von $F$ nach $f'$ ein, erhält man
+
+\begin{equation}\label{equationwithc}
+ \sqrt{\frac{1+f'(x)^2}{2g(y_0-f)}} - (f')^2 \cdot \sqrt{\frac{1}{2g(1+{f'}^2) \cdot (y_0 - f)}} = c.
+\end{equation}
+
+Dabei kann das $F$ umgeformt werden und es entsteht
+
+\begin{equation}\label{Fumgeformt}
+F=\sqrt{\frac{1+f'(x)^2}{2g(y_0-f)}}
+= \frac{1}{\sqrt{2g(y_0-f)}} \cdot \left( \sqrt{1+(f')^2}- \frac{(f')^2}{\sqrt{1+(f')^2}}\right).
+\end{equation}
+
+Formt man nun \ref{equationwithc} mithilfe von \ref{Fumgeformt} nach $c$ um, enthält man folgenden Term:
+
+\begin{equation}
+ \frac{1}{2g\cdot c^2}= (y_0-f)(1+(f')^2)= d.
+\end{equation}
+
+Wir nennen den Term $\frac{1}{2g\cdot c^2}$ einfach nun $d$ - dies ist eine weitere Konstante.
+Ein einfaches Gedankenexperiment macht klar, dass wir den Anfangspunkt der Rutsche, also $y_0$, an jeden beliebigen Punkt im $\mathbb{R}^2$ hin verschieben können, also auch $y_0=0$ setzen können. 
+
+Somit erhalten wir eine schöne Differentialgleichung:
+
+\begin{equation}\label{DGL,yay!}
+ d=-f\cdot (1+(f')^2).
+\end{equation}
+
+Wir könnten uns nun auf den langen und anstrengenden Weg machen, diese Differentialgleichung weiter umzuformen und zu lösen. 
+Der dafür notwendige Stoff könnte allerdings eine gesamte weitere Seminararbeit anfüllen. 
+Für uns reicht es zu zeigen, dass die Gleichung, die die perfekte Kurve angibt, auch tatsächlich \ref{DGL,yay!} erfüllt.
+
+
+\section{Einsetzen der Zykloidgleichung in die Differentialgleichung}
+
+
+Die Gleichung für unsere schnellste Rutsche ist durch zwei Parameter, nämlich den $x-$ und $y-$Parameter gegeben:
+
+\begin{equation}\label{brachiparameters}
+ \begin{gathered}
+  x= r \cdot (\phi - \sin \phi ).\\
+  y = r \cdot (-1+ \cos \phi ). \\
+  r=\frac{2 \cdot y_0}{\pi}
+ \end{gathered}
+\end{equation}
+
+Anmerkung: Wenn wir festlegen, dass unsere y-Achse gespiegelt ist, sodass die Rutsche nach unten und nicht nach oben wie eine typische Zykloidkurve verläuft, muss ein Minuszeichen vor der zweiten Gleichung aus \ref{brachiparameters} gesetzt werden. Das $r$ ist konstant.
+
+Dies ergibt die Bahnform eines Abschnittes aus eines \textit{Zykloiden}. 
+Ein Zykloid ist die Bahn, die ein Punkt nachfährt, der sich auf dem Rand eines rollenden Kreises sich bewegt.\footnote{Wikipedia hat dazu und auch zu dem Aussehen einer Brachistochrone einige interessante Animationen.}
+Dabei ist $\phi$ der enstehende Wälz-Winkel. 
+Dieser kam bisher allerdings noch gar nicht vor.
+
+Allerdings können wir ja feststellen, dass beide Variablen $x$ und $y$ von $\phi$ abhängen, also können wir $x(\phi)$ und $y(\phi)$ schreiben.
+Es gilt
+
+\begin{equation}
+ \frac{\dd y}{\dd \phi} = \frac{\dd y}{\dd x} \cdot \frac{\dd x}{\dd \phi}.
+\end{equation}
+
+Wir wissen, dass $\frac{\dd y}{\dd x}=f'$ gilt, und können die Ableitung von $x$ nach $\phi$ berechnen:
+
+\begin{equation}
+ \frac{\dd x}{\dd \phi} = r \cdot (1- \cos (\phi)).
+\end{equation}
+Wir wissen auch, dass folgendes gilt:
+
+\begin{equation}
+ \frac{\dd y}{\dd \phi} = r \cdot \sin (\phi).
+\end{equation}
+
+Für die Berechnung von $(f')^2$ müssen wir erst einmal $f'$ berechnen:
+\begin{equation}
+ f'= \frac{\dd y}{\dd x}= 
+ \frac{\frac{\dd y}{\dd \phi} }{\frac{\dd x}{\dd \phi}} =
+ \frac{(r \cdot \sin (\phi)}{(r \cdot (1- \cos (\phi))}.
+\end{equation}
+
+Damit kann man auch $f'$ erhalten.
+
+\begin{equation}
+ (f')^2= 
+ \left(\frac{(r \cdot \sin (\phi)}{(r \cdot (1- \cos (\phi))}\right)^2= 
+ \left(\frac{\sin (\phi)}{1-\cos (\phi)}\right) ^2.
+\end{equation}
+
+Setzen wir nun dies in \ref{DGL,yay!} ein, kommt heraus
+
+\begin{equation}
+ -f \cdot (1+(f'^2) = d = -f \cdot \left(1+\left(\frac{\sin (\phi)}{1-\cos (\phi)}\right) ^2\right).
+\end{equation}
+
+Durch Multiplikation mit $(1-\cos (\phi))^2=\sin(\phi)$ kann man dies vereinfachen zu
+
+\begin{equation}
+ -f \cdot \sin(\phi)^2 - f \cdot \sin(\phi)^2 = d \cdot \sin(\phi)^2 \iff 
+ -2 f \cdot \sin (\phi)^2 = d \cdot \sin(\phi)^2.
+\end{equation}
+
+Formen wir dies noch ein wenig um, entsteht
+
+\begin{equation}
+ f \cdot \sin (\phi)^2 = -d \cdot \sin(\phi)^2 \iff f = -d. \qedhere
+\end{equation}
+
+Dies bedeutet, dass in diesem Fall $d$ tatsächlich konstant ist, nämlich $-f$, was ja die Funktion ist, die die Kurve beschreibt. Somit haben wir eine Lösung des Brachistochronenproblems gefunden!\footnote{Gezeigt wird nicht, dass es die \textit{einzige} Lösung des Problems ist, denn dafür müsste man die Differenzialgleichung tatsächlich lösen. 
+Das ist jedoch der Fall.}
+
+\section{Was ist überhaupt ein Zykloid?}
+
+Ein Zykloid ist eine Art an Funktion, die durch einen Punkt auf einem rollenden Kreis gezeichnet wird. 
+Zykloide erfüllen eine Reihe an interessanten Eigenschaften, die heutzutage vor allem in der Physik genutzt werden und sind schon lange Mathematiker*innen bekannt - beispielsweise hat schon Galileo Galilei hat an ihnen geforscht. 
+
+Die Brachistochrone ist ein an der $x-$Achse gespiegelter Zykloid. 
+Dies macht intuitiv Sinn - wir wollen in die Richtung rutschen, die wir als unten annehmen. 
+%\section{Nebenrechnung - Was ist $\frac{\partial F}{\partial f'}$?}
+
+%Es ist bekannt, dass
+
+%\begin{equation}
+ % \frac{\dd}{\dd x} \left( F(f,f') - f' \cdot \frac{\partial F}{\partial f'}(f,f') \right) = 0
+%\end{equation}
+
+%gilt. Dies können wir nun umformen und erhalten
+
+%\begin{equation}
+% \frac{\partial F}{\partial f} \cdot f' + \frac{\partial F}{\partial f'} \cdot f'' - f'' \cdot \frac{\partial F}{\partial f'} - f' \cdot \frac{\dd}{\dd x} \cdot \frac{\partial F}{\partial f'}=f' \cdot \left( \frac{\partial F}{\partial f}-\frac{\dd}{\dd x} \cdot \frac{\partial F}{\partial f'} \right)= 0.
+%\end{equation}
+\section{Fazit}
+Nach all dieser Rechenarbeit sind wir nun endlich bei dem Ergebnis angekommen: einer Gleichung für das Aussehen der schnellsten Rutsche. Dabei war die Vorangehensweise, zuerst aus Anfangsannahmen Folgerungen zu schließen, die Aussagen über unsere Rutschfunktion treffen. Mithilfe dieser können wir nun den Funktionsgraphen eindeutig beschreiben.
+
+Somit ist uns die Lösung des Brachistochronenproblems gelungen.
+
+
+\nocite{*}
+
+\chapter*{Danksagung}
+%\addcontentsline{toc}{section}{Danksagungen}
+Diese Arbeit wäre ohne die Hilfe sehr vieler toller Menschen absolut unmöglich gewesen.
+Würde man versuchen, sie alle zu nennen, würde die Danksagung mindestens genauso lang wie die tatsächliche Arbeit dauern. 
+Daher seien an dieser Stelle nur ein paar genannt.
+Zuallererst gebührt dieser Dank Marc, 
+ohne dessen hilfreiche Erklärungen, 
+Einsicht in meine eigene Denkweise und 
+Glaube an meine Fähigkeiten ich nie auf die Idee gekommen wäre, 
+mich mit einem solch wunderbarem Thema in einer Seminararbeit der Oberstufe auseinanderzusetzen. 
+
+Vielen, vielen Dank auch an alle Menschen, die mich immer mal wieder im Offenen Matheraum der Universität Augsburg auf meine Seminararbeit angesprochen haben, wo man mich an den meisten Nachmittag über einen ganzen Stapel unordentlicher loser Zettel gebeugt vor mich hin kritzelnd finden konnte. 
+An Adrian für den Exkurs in die Physik der Kräfte
+und auch in die Quantenmechanik anhand der Bücher Greg Egans; 
+an Luca für die Ideenfindung zur tatsächlichen Lösung
+und Unterstützung meiner kompletten Planlosigkeit. 
+Eine besondere Erwähnung verdient auch Odi,
+der einfach mir ein Skript aus der Analysis III
+zur Weihnachtsübung annotiert mitgebracht hat und
+mich bei mindestens sieben Gelegenheiten vor viel Prokrastination bewahrt hat.
+
+Auf der schulischen Seite der Münze möchte ich ein großes Dankeschön an Emilia aussprechen,
+die mich immer mal wieder daran erinnert hat,
+dass es okay ist, wenn es mal nicht weitergeht. 
+Zudem gebührt meinem Seminarleiter Pater Augustin
+großer Respekt für seine Geduld und Milde angesichts mancher
+sehr außergewöhnlichen Nachfragen zu viel zu spezifischen Problemen. 
+
+Schlussendlich will ich Georgi danken - für die langen Mails, fürs Zuhören, und für genau die richtigen Worte zu genau der richtigen Zeit.
+
+
+\medskip
+
+\chapter*{Literaturverzeichnis}
+%\printbibliography
+\printbibliography[title={Monographien},type=book,sorting=nyt,heading=subbibliography]
+\printbibliography[title=
+{Internetquellen},type=online,sorting=nyt,heading=subbibliography]
+\thispagestyle{empty}
+
+\listoffigures
+\thispagestyle{empty}
+\newpage
+\chapter*{Erklärung der selbstständigen Anfertigung}
+
+Ich versichere, dass ich diese Seminararbeit ohne fremde Hilfe angefertigt und nur die im Literaturverzeichnis angeführten Quellen und Hilfsmittel benutzt habe.
+Alle Ausführungen der Arbeit, die wörtlich oder sinngemäß übernommen wurden, sind als solche gekennzeichnet.
+
+
+\vspace{32pt}
+
+
+Augsburg, den 07.11.2023
+\end{document}
